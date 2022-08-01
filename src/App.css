@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.stateBox {
+  border-radius: 50%;
+  border: 1px solid black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 15px;
+  width: 15px;
+  justify-content: center;
+}
