@@ -17,6 +17,7 @@ const Checkbox = () => {
       const elements=e.target.elements
      console.log(elements)
      const elementArray=[...elements]
+     // return a array with checkbox value true and their respective name
      const result=elementArray.slice(0,elementArray.length-1).reduce((acc,item)=>{
       if(item.checked){
         acc.push({
@@ -31,7 +32,7 @@ const Checkbox = () => {
 
 
     
-    console.log("Data",data)
+    // console.log("Data",data)
 
   return (
     <form onSubmit={(e)=>formValues(e)}>

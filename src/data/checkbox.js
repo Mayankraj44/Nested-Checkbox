@@ -1,41 +1,47 @@
 export const data = [
    
     {
-        name: "0-0-0", 
-        parentId: "0-0",
+        name: "Cricket", 
+        parentId: "Games",
     }, {
-        name: "0-0-0-0", 
-        parentId: "0-0-0",
+        name: "Bat", 
+        parentId: "Cricket",
     }, {
-        name: "0-0-0-1", 
-        parentId: "0-0-0",
+        name: "Ball", 
+        parentId: "Cricket",
     }, {
-        name: "0-0-0-2", 
-        parentId: "0-0-0",
+        name: "Stump", 
+        parentId: "Cricket",
     }, {
-        name: "0-0-1-0",
-        parentId: "0-0-1",
+        name: "Handle", 
+        parentId: "Bat",
     }, {
-        name: "0-0-1-1",
-        parentId: "0-0-1",
+        name: "Body", 
+        parentId: "Bat",
     }, {
-        name: "0-0-1-2",
-        parentId: "0-0-1",
+        name: "Mango",
+        parentId: "Fruits",
     }, {
-        name: "0-0-2", 
-        parentId: "0-0",
+        name: "Apple",
+        parentId: "Fruits",
     }, {
-        name: "0-1-0", 
-        parentId: "0-1",
+        name: "Orange",
+        parentId: "Fruits",
+    }, {
+        name: "Hockey", 
+        parentId: "Games",
+    }, {
+        name: "Kiwi", 
+        parentId: "Fruits",
     }, 
     {
-        name: "0-0", 
+        name: "Games", 
         parentId: null
     }, {
-        name: "0-1", 
+        name: "Fruits", 
         parentId: null,
     }, {
-        name: "0-2", 
+        name: "Furniture", 
         parentId: null,
     },
     
@@ -47,19 +53,19 @@ export const tree=()=>{
         map[element.name]=ind;
         element.children=[]
     });
-    console.log("map",map)
-    console.log("Data",data)
+    // console.log("map",map)
+    // console.log("Data",data)
     
     
     data.forEach((element,ind,array)=>{
-        console.log("Index",ind)
+        // console.log("Index",ind)
         const node=element
         if(node.parentId !== null && map.hasOwnProperty(node.parentId)){
             array[map[node.parentId]].children.push(node)
         }
     })
-    console.log("data",data)
+    // console.log("data",data)
     const result=data.filter(item=>item.parentId===null)
-    console.log("Result",JSON.stringify(result))
+    // console.log("Result",JSON.stringify(result))
     return result
     }
