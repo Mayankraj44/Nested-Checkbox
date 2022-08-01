@@ -12,14 +12,32 @@ const Checkbox = () => {
       setData(result)
     },[])
 
+    const formValues=(e)=>{
+      e.preventDefault()  
+      const elements=e.target.elements
+     console.log(elements)
+     const elementArray=[...elements]
+     const result=elementArray.slice(0,elementArray.length-1).reduce((acc,item)=>{
+      if(item.checked){
+        acc.push({
+          name:item.getAttribute("data-name"),
+          checked:item.checked
+        })
+      }
+      return acc
+     },[])
+     console.log("Form values",result)
+    }
+
 
     
     console.log("Data",data)
 
   return (
-    <>
+    <form onSubmit={(e)=>formValues(e)}>
     {data && <CheckBoxParent data={data} />}
-    </>
+    <button >Submit</button>
+    </form>
   )
 }
 
