@@ -37,13 +37,48 @@
   }
 }
 
-.stateBox {
-  border-radius: 50%;
-  border: 1px solid black;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  height: 15px;
-  width: 15px;
-  justify-content: center;
+
+
+input[type="checkbox"] {
+  appearance: none;
+   background-color: #fff;
+   margin: 0;
+   font: inherit;
+   color: currentColor;
+   min-width: 18px;
+   min-height: 18px;
+   max-width: 18px;
+   max-height: 18px;
+   border: 1px solid #CAD1D4;
+   border-radius: 4px;
+   transform: translateY(-0.075em);
+   display: grid;
+   place-content: center;
+   margin-right: 10px;
+ }
+
+ 
+ 
+ input[type="checkbox"]::before {
+   content: "";
+   width: 10px;
+   height: 10px;
+   border-radius:50%;
+   transform: scale(0);
+  
+   background-color:#41C3A9;
+ }
+ 
+ input[type="checkbox"]:checked::before {
+   transform: scale(1);
+ }
+
+ input[type="checkbox"]:indeterminate::before{
+  content: "";
+  width: 10px;
+  height: 4px;
+  transform: scale(1);
+  border-radius: 0%;
+  
+  background-color:#41C3A9;
 }

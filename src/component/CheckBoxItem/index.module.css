@@ -1,0 +1,35 @@
+.test {
+  position: relative;
+}
+
+.stateBox {
+  border-radius: 50%;
+  border: 1px solid #cad1d4;
+  cursor: pointer;
+  color: #74838f;
+  display: flex;
+  align-items: center;
+  height: 18px;
+  width: 18px;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-right: 10px;
+  background-color: white;
+  z-index: 3;
+}
+
+.verticalLine {
+  position: absolute;
+  border-left: 1px dashed #cad1d4;
+  height: 100%;
+  top: 18px;
+  left: 36px;
+}
+.horizontalLine {
+  width: 17px;
+  margin-right: 10px;
+  border-top: 1px dashed #cad1d4;
+  position: relative;
+  top: 8px;
+  left: 9px;
+}

@@ -1,17 +1,21 @@
-import React, { useRef, useState } from "react";
-import CheckBoxParent from "./CheckBoxParent";
+import React, { useMemo, useRef, useState } from "react";
+import CheckBoxParent from "../CheckBoxParent/CheckBoxParent";
+import { ReactComponent as Expand } from "../../assets/expand.svg";
+import { ReactComponent as Shrink } from "../../assets/shrink.svg";
+import styles from "./index.module.css"
 
-const CheckBoxItem = ({ data }) => {
+const CheckBoxItem = ({ data, itemCount, index }) => {
   const [expanded, setExpanded] = useState(true); //let all parent to be expanded in initial render
   const ref = useRef(null);
   const checkBoxRef = useRef(null);
+  const childrenLength = useMemo(() => data.children.length, []);
 
   const toggleExpanded = () => {
     setExpanded((prev) => !prev);
   };
 
   function handleClick(e) {
-    // console.log(data.name, " clicked", e);
+    console.log(data.name, " clicked", e);
     const inputs = ref.current.querySelectorAll("input[type=checkbox]");
     //only trigger this event when this is bubbling not on its own checkox state change
     if (inputs.length && e.target !== checkBoxRef.current) {
@@ -19,16 +23,16 @@ const CheckBoxItem = ({ data }) => {
       const result = inputArray.map((ele) => ele.checked);
       const checkFlag = result.indexOf(true);
       const unCheckFlag = result.indexOf(false);
-    
+
       if (checkFlag !== -1 && unCheckFlag !== -1) {
-          // if all input are not same in this parent then put indeterminate state on for this parent checkbox
+        // if all input are not same in this parent then put indeterminate state on for this parent checkbox
         checkBoxRef.current.indeterminate = true;
       } else if (checkFlag !== -1 && unCheckFlag === -1) {
-          // if all input are true and turn inderminate off and true the state of parent checkbox because all child input box are in checked state
+        // if all input are true and turn inderminate off and true the state of parent checkbox because all child input box are in checked state
         checkBoxRef.current.indeterminate = false;
         checkBoxRef.current.checked = true;
       } else {
-          // if all input are false and turn inderminate off and false the state of parent checkbox because all child input box are in unchecked state
+        // if all input are false and turn inderminate off and false the state of parent checkbox because all child input box are in unchecked state
 
         checkBoxRef.current.indeterminate = false;
         checkBoxRef.current.checked = false;
@@ -52,29 +56,40 @@ const CheckBoxItem = ({ data }) => {
   }
 
   return (
-    <div onClick={handleClick} className="test">
+    <div onClick={handleClick} className={styles.test}>
       <div style={{ display: "flex" }}>
-        {
-          <div
-            className="stateBox"
-            style={{ visibility: `${data.children.length === 0 && "hidden"}` }}
-            onClick={toggleExpanded}
-          >
-            {expanded ? "-" : "+"}
+        {!!childrenLength && (
+          <div className={styles.stateBox} onClick={toggleExpanded}>
+            {expanded ? <Shrink /> : <Expand />}
           </div>
-        }
+        )}
+        {!childrenLength && <div className={styles.horizontalLine}></div>}
+
         <input
           ref={checkBoxRef}
           type="checkbox"
           data-name={data.name}
-          defaultValue={false} //let default state of 
+          defaultValue={false} //let default state of
           onChange={(e) => toggleActiveState(e)}
         />
-        <label>{data.name}</label>
+        <label
+          style={{
+            fontWeight: `${childrenLength ? "600" : "400"}`,
+            color: `${childrenLength ? "#0D2238" : "#7A7A7A"}`,
+          }}
+        >
+          {data.name}
+        </label>
       </div>
       <div ref={ref} style={{ display: `${expanded ? "block" : "none"}` }}>
         <CheckBoxParent data={data.children} />
       </div>
+      {!!data.children.length && index + 1 !== itemCount && (
+        <div className={styles.verticalLine}></div>
+      )}
+      {index + 1 === itemCount && !!data.children.length && expanded && (
+        <div style={{ height: "32px" }} className={styles.verticalLine}></div>
+      )}
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {data as listData} from "../../data/checkbox"
 import { tree } from '../../data/checkbox';
-import CheckBoxItem from './CheckBoxItem';
-import CheckBoxParent from './CheckBoxParent';
+import CheckBoxItem from '../CheckBoxItem/CheckBoxItem';
+import CheckBoxParent from '../CheckBoxParent/CheckBoxParent';
 
 const Checkbox = () => {
     const [data,setData]=useState();
@@ -32,12 +32,11 @@ const Checkbox = () => {
 
 
     
-    // console.log("Data",data)
+    console.log("Data",data)
 
   return (
     <form onSubmit={(e)=>formValues(e)}>
     {data && <CheckBoxParent data={data} />}
-    <button >Submit</button>
     </form>
   )
 }
