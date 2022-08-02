@@ -57,7 +57,7 @@ const CheckBoxItem = ({ data, itemCount, index }) => {
 
   return (
     <div onClick={handleClick} className={styles.test}>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex",alignItems:"center" }}>
         {!!childrenLength && (
           <div className={styles.stateBox} onClick={toggleExpanded}>
             {expanded ? <Shrink /> : <Expand />}
@@ -88,7 +88,7 @@ const CheckBoxItem = ({ data, itemCount, index }) => {
         <div className={styles.verticalLine}></div>
       )}
       {index + 1 === itemCount && !!data.children.length && expanded && (
-        <div style={{ height: "32px" }} className={styles.verticalLine}></div>
+        <div style={{ height: "calc(100% - 32px)" }} className={styles.verticalLine}></div>
       )}
     </div>
   );

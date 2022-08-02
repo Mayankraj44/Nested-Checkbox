@@ -22,7 +22,7 @@
   position: absolute;
   border-left: 1px dashed #cad1d4;
   height: 100%;
-  top: 18px;
+  top: 21px;
   left: 36px;
 }
 .horizontalLine {
@@ -30,6 +30,6 @@
   margin-right: 10px;
   border-top: 1px dashed #cad1d4;
   position: relative;
-  top: 8px;
+  top: 0px;
   left: 9px;
 }

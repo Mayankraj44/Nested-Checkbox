@@ -67,7 +67,10 @@ export const data = [
     name: "Tennis",
     parentId: "Sports",
   },
-  
+  {
+    name: "Badminton",
+    parentId: "Sports",
+  },
   
 ];
 
