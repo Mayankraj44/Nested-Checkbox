@@ -55,6 +55,7 @@ input[type="checkbox"] {
    display: grid;
    place-content: center;
    margin-right: 10px;
+   z-index: 10;
  }
 
  

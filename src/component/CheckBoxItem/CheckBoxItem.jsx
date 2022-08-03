@@ -1,21 +1,20 @@
-import React, { useMemo, useRef, useState } from "react";
-import CheckBoxParent from "../CheckBoxParent/CheckBoxParent";
+import React, { useRef, useState } from "react";
 import { ReactComponent as Expand } from "../../assets/expand.svg";
 import { ReactComponent as Shrink } from "../../assets/shrink.svg";
-import styles from "./index.module.css"
+import CheckBoxParent from "../CheckBoxParent/CheckBoxParent";
+import styles from "./index.module.css";
 
 const CheckBoxItem = ({ data, itemCount, index }) => {
   const [expanded, setExpanded] = useState(true); //let all parent to be expanded in initial render
   const ref = useRef(null);
   const checkBoxRef = useRef(null);
-  const childrenLength = useMemo(() => data.children.length, []);
 
   const toggleExpanded = () => {
     setExpanded((prev) => !prev);
   };
 
   function handleClick(e) {
-    console.log(data.name, " clicked", e);
+    // console.log(data.name, " clicked", e);
     const inputs = ref.current.querySelectorAll("input[type=checkbox]");
     //only trigger this event when this is bubbling not on its own checkox state change
     if (inputs.length && e.target !== checkBoxRef.current) {
@@ -54,10 +53,15 @@ const CheckBoxItem = ({ data, itemCount, index }) => {
       });
     }
   }
+  const childrenLength = data.children.length;
+  const isNotLastElementAndHaveChildren =
+    !!data.children.length && index + 1 !== itemCount;
+  const isLastElementHaveChildAndExpanded =
+    index + 1 === itemCount && !!data.children.length && expanded;
 
   return (
     <div onClick={handleClick} className={styles.test}>
-      <div style={{ display: "flex",alignItems:"center" }}>
+      <div style={{ display: "flex", alignItems: "center" }}>
         {!!childrenLength && (
           <div className={styles.stateBox} onClick={toggleExpanded}>
             {expanded ? <Shrink /> : <Expand />}
@@ -74,6 +78,7 @@ const CheckBoxItem = ({ data, itemCount, index }) => {
         />
         <label
           style={{
+            overflowWrap: "break-word",
             fontWeight: `${childrenLength ? "600" : "400"}`,
             color: `${childrenLength ? "#0D2238" : "#7A7A7A"}`,
           }}
@@ -84,11 +89,15 @@ const CheckBoxItem = ({ data, itemCount, index }) => {
       <div ref={ref} style={{ display: `${expanded ? "block" : "none"}` }}>
         <CheckBoxParent data={data.children} />
       </div>
-      {!!data.children.length && index + 1 !== itemCount && (
+      {isNotLastElementAndHaveChildren && (
         <div className={styles.verticalLine}></div>
       )}
-      {index + 1 === itemCount && !!data.children.length && expanded && (
-        <div style={{ height: "calc(100% - 32px)" }} className={styles.verticalLine}></div>
+
+      {isLastElementHaveChildAndExpanded && (
+        <div
+          style={{ height: "calc(100% - 32px)" }}
+          className={styles.verticalLine}
+        ></div>
       )}
     </div>
   );
